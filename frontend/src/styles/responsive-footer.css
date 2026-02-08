@@ -1,0 +1,105 @@
+/* Footer Mobile Responsive Styles */
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 2.5rem 0 1rem !important;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+    text-align: center;
+  }
+  
+  .footer-section:first-child {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .footer-section:first-child > div:first-child {
+    justify-content: center !important;
+  }
+  
+  .footer-section:first-child > p {
+    max-width: 400px;
+    margin: 0 auto 1rem;
+  }
+  
+  .footer-section:first-child > div:last-child {
+    justify-content: center !important;
+  }
+  
+  .footer-section h4 {
+    font-size: 1.15rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .footer-section a,
+  .footer-section p {
+    font-size: 0.95rem !important;
+  }
+  
+  .footer-bottom {
+    padding-top: 1.5rem !important;
+    margin-top: 1.5rem !important;
+    position: relative;
+    text-align: center;
+  }
+  
+  .footer-bottom > div:last-child {
+    position: static !important;
+    margin-top: 1rem;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 2rem 0 1rem !important;
+  }
+  
+  .footer-content {
+    gap: 2rem !important;
+  }
+  
+  .footer-section:first-child img {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  
+  .footer-section:first-child span {
+    font-size: 1.25rem !important;
+  }
+  
+  .footer-section:first-child > p {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .footer-section:first-child > div:last-child {
+    gap: 0.75rem !important;
+  }
+  
+  .footer-section:first-child > div:last-child a {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .footer-section:first-child > div:last-child a svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  .footer-section h4 {
+    font-size: 1.1rem !important;
+  }
+  
+  .footer-section a,
+  .footer-section p {
+    font-size: 0.9rem !important;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.85rem !important;
+  }
+}

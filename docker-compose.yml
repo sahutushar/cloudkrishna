@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cloudkrishna-backend
+    restart: unless-stopped
+    ports:
+      - "5555:5555"
+    environment:
+      - NODE_ENV=production
+      - PORT=5555
+      - MONGODB_URI=${MONGODB_URI}
+      - AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
+      - AZURE_CONTAINER_NAME=${AZURE_CONTAINER_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRE=7d
+    networks:
+      - cloudkrishna-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5555/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cloudkrishna-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - cloudkrishna-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Admin Dashboard Service
+  admin:
+    build:
+      context: ./admin-dashboard
+      dockerfile: Dockerfile
+    container_name: cloudkrishna-admin
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    networks:
+      - cloudkrishna-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  cloudkrishna-network:
+    driver: bridge
+
+volumes:
+  backend-uploads:
